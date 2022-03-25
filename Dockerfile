@@ -5,7 +5,8 @@ ENV DEBIAN_FRONTEND="noninteractive" TZ="Europe/London"
 
 
 RUN apt-get update -y
-RUN pip install pillow
+RUN pip3 install pillow
+RUN python3 -m pip install pillow
 
 #RUN apt-get update && apt-get install -y --no-install-recommends software-properties-common \
 #    libsm6 libxext6 libxrender-dev curl \

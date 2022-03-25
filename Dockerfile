@@ -5,6 +5,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends software-proper
     libsm6 libxext6 libxrender-dev curl \
     && rm -rf /var/lib/apt/lists/*
 
+ENV DEBIAN_FRONTEND="noninteractive" TZ="Europe/London"
+
 RUN add-apt-repository ppa:deadsnakes/ppa
 RUN apt-get install -y build-essential python3.6 python3.6-dev python3-pip 
 RUN curl -O https://bootstrap.pypa.io/get-pip.py 

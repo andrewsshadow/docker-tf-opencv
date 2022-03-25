@@ -18,26 +18,28 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Install Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: 1.16.4
 
-      - name: Checkout code
+      - name: Check Out Repo 
         uses: actions/checkout@v2
 
-      - name: Fetch required Go modules
-        run:  go mod download
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
-      - name: Build
-        run:  go build -v ./...
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
 
-      - name: Build Docker image
+      - name: Build and push
+        id: docker_build
         uses: docker/build-push-action@v2
         with:
-          push: false
-          tags: ${{ github.event.repository.name }}:latest, ${{ github.repository }}:latest
+          context: ./
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/tf-opencv:latest
 
-      - name: Run functional tests
-        run:  go test -v ./...
-
+      - name: Image digest
+        run: echo ${{ steps.docker_build.outputs.digest }}

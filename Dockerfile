@@ -19,5 +19,5 @@ RUN python3 -m pip install -U -force-reinstall tensorflow==2.3
 
 RUN apt-get install -y python3-opencv
 RUN apt-get install -y libgl1
-RUN pip3 install opencv-python-headless
+RUN echo '1' | pip3 install opencv-python-headless 
 RUN pip3 install pandas

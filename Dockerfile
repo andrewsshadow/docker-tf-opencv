@@ -22,8 +22,8 @@ RUN python3 -m pip install cudnnenv
 
 RUN pip3 install pillow
 RUN python3 -m pip install pillow
-RUN python3 -m3 pip install pillow
+RUN python3 -m pip3 install pillow
 
 RUN python3 -m pip install -U -force-reinstall tensorflow==2.3
 
-#UN pip3 install pandas
+#RUN pip3 install pandas

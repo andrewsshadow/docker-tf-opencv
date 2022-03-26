@@ -28,7 +28,7 @@ RUN python3 -m pip uninstall -y tensorflow-gpu keras tensorflow
 RUN pip3 install pillow
 RUN python3 -m pip install pillow
 
-RUN python3 -m pip install -U -force-reinstall tensorflow==2.3
+RUN python3 -m pip install -U --force-reinstall tensorflow==2.3
 
 #RUN pip3 install pandas
 

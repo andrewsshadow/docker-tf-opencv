@@ -20,9 +20,16 @@ RUN curl -O https://bootstrap.pypa.io/get-pip.py
 RUN python3 -m pip install -U pip
 RUN python3 -m pip install cudnnenv
 
+RUN export LD_LIBRARY_PATH=~/.cudnn/active/cuda/lib64:$LD_LIBRARY_PATH
+RUN export CPATH=~/.cudnn/active/cuda/include:$CPATH
+RUN export LIBRARY_PATH=~/.cudnn/active/cuda/lib64:$LIBRARY_PATH
+RUN python3 -m pip uninstall -y tensorflow-gpu keras tensorflow
+
 RUN pip3 install pillow
 RUN python3 -m pip install pillow
 
 RUN python3 -m pip install -U -force-reinstall tensorflow==2.3
 
 #RUN pip3 install pandas
+
+CMD ["python3 ","-c","'import tensorflow as tf; tf.test.is_gpu_available()'"]
